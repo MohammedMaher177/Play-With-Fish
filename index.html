@@ -33,6 +33,11 @@
       .powerdBy img{
         width: 100%;
       }
+
+      #fallbackMessage{
+        position: absolute;
+    top: 0;
+      }
       
     </style>
     <script src="https://cdn.jsdelivr.net/npm/three@0.115.0/build/three.min.js"></script>
@@ -341,5 +346,39 @@
         renderer.render(scene, camera);
       });
     </script>
+     <audio id="myAudio">
+      <source src="./audio.mp3" type="audio/mp3">
+      Your browser does not support the audio element.
+  </audio>
+  <p id="fallbackMessage" style="display: none;">Your browser blocked autoplay. <button id="playButton">Click here to play audio.</button></p>
+  <script>
+
+    const audio = document.getElementById('myAudio');
+    const fallbackMessage = document.getElementById('fallbackMessage');
+    const playButton = document.getElementById('playButton');
+// Function to play audio
+const playAudio = () => {
+  audio.play()
+    .then(() => console.log('Audio is playing'))
+    .catch((error) => {console.error('Error playing audio:', error)
+    fallbackMessage.style.display = 'block'; 
+    });
+};
+
+const interactionEvents = ['click', 'keydown', 'scroll', 'mousemove'];
+    interactionEvents.forEach((event) => {
+      window.addEventListener(event, playAudio, { once: true });
+    });
+
+    playButton.addEventListener('click', () => {
+      audio.play()
+        .then(() =>{ console.log('Audio is playing')
+        fallbackMessage.style.display = 'none'; 
+        })
+        .catch((error) => console.error('Error playing audio:', error));
+    });
+
+
+</script>
   </body>
 </html>
