@@ -372,7 +372,7 @@
         });
     };
 
-    const interactionEvents = ['click', 'keydown', 'scroll', 'mousemove'];
+    const interactionEvents = ['click', 'keydown', 'scroll', 'mousemove', 'touchstart', 'touchend', 'touchmove', 'orientationchange'];
     interactionEvents.forEach((event) => {
       window.addEventListener(event, playAudio, { once: true });
     });
